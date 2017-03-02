@@ -15,6 +15,8 @@ function ToBuyController(ShoppingListCheckOffService) {
   ShoppingListCheckOffService.addItemToBuy("cookies", 10);
   ShoppingListCheckOffService.addItemToBuy("milks", 2);
   ShoppingListCheckOffService.addItemToBuy("sugars", 7);
+  ShoppingListCheckOffService.addItemToBuy("bread", 1);
+  ShoppingListCheckOffService.addItemToBuy("Ham", 4);
 
   buy.addItem = function () {
     ShoppingListCheckOffService.addItemToBuy(buy.name, buy.quantity);
