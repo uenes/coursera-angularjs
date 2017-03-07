@@ -56,8 +56,11 @@ function MenuSearchService($http, ApiBasePath) {
 
   service.searchByDescription = function (name, list) {
     var result = [];
+    console.log("length",list.length);
     for (var i = 0; i < list.length; i++) {
-      if (list[i].special_instructions.indexOf(name) != -1) {
+      console.log("list[i].description", list[i].description);
+      console.log("name", name);
+      if (list[i].description.indexOf(name) != -1) {
         result.push(list[i]);
       }
     }
@@ -67,20 +70,7 @@ function MenuSearchService($http, ApiBasePath) {
   service.getMenu = function () {
     var response = $http({
       method: "GET",
-      url: (ApiBasePath + "/categories.json")
-    });
-
-    return response;
-  };
-
-
-  service.getMenuForCategory = function (shortName) {
-    var response = $http({
-      method: "GET",
-      url: (ApiBasePath + "/menu_items.json"),
-      params: {
-        category: shortName
-      }
+      url: (ApiBasePath + "/menu_items.json")
     });
 
     return response;
@@ -91,7 +81,9 @@ function MenuSearchService($http, ApiBasePath) {
       var promise = service.getMenu();
 
       promise.then(function (response) {
-        service.categories = service.searchByDescription(name, response.data);
+        console.log("response.data>> ",response.data);
+        service.categories = service.searchByDescription(name, response.data.menu_items);
+        console.log("Cat >> ", service.categories);
       })
       .catch(function (error) {
         console.log("Something went terribly wrong.");
