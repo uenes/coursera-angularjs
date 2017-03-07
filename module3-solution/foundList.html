@@ -1,0 +1,10 @@
+<table class="table table-striped">
+  <tbody>
+    <tr ng-repeat="f in narrow.found()">
+      <td>{{f.short_name}}</td>
+      <td>{{f.name}}</td>
+      <td>{{f.special_instructions}}</td>
+      <td><button class="btn btn-danger" ng-click="narrow.removeItem($index)">Don't want this one!</button ></td>
+    </tr>
+  </tbody>
+</table>

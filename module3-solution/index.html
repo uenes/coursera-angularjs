@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app='NarrowItDownApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+  </head>
+  <body>
+    <div class="container" ng-controller="NarrowItDownController as narrow">
+      <h1>Narrow Down Your Chinese Menu Choice</h1>
+
+      <div class="form-group">
+        <input type="text" ng-model="narrow.name" placeholder="search term" class="form-control">
+      </div>
+      <div class="form-group narrow-button">
+        <button class="btn btn-primary" ng-click="narrow.searchItems()" >Narrow It Down For Me!</button>
+      </div>
+
+    </br></br></br></br>
+    <!-- <table class="table table-striped">
+      <tbody>
+        <tr ng-repeat="f in narrow.found()">
+          <td>{{f.short_name}}</td>
+          <td>{{f.name}}</td>
+          <td>{{f.special_instructions}}</td>
+          <td><button class="btn btn-danger" ng-click="narrow.removeItem($index)">Don't want this one!</button ></td>
+        </tr>
+      </tbody>
+    </table> -->
+
+    <div class="alert alert-danger" ng-if="narrow.nothingFound()">Nothing found</div>
+
+      <!-- found-items should be implemented as a component -->
+        <found-items items="narrow.found()" on-remove="narrow.removeItem(index)" ></found-items>
+    </div>
+
+  </body>
+</html>
