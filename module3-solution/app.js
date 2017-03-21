@@ -81,9 +81,7 @@ function MenuSearchService($http, ApiBasePath) {
       var promise = service.getMenu();
 
       promise.then(function (response) {
-        console.log("response.data>> ",response.data);
         service.categories = service.searchByDescription(name, response.data.menu_items);
-        console.log("Cat >> ", service.categories);
       })
       .catch(function (error) {
         console.log("Something went terribly wrong.");
