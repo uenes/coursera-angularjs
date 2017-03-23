@@ -1,6 +1,6 @@
-teste: {{$ctrl.items.length}}
 <ul>
-  <li ng-repeat="item in $ctrl.items">
-     {{ item.name }}
+  <li ng-repeat="item in $ctrl.items"
+      ui-sref="itemDetail({short_name: item.short_name})">
+    {{ item.name }}
   </li>
 </ul>

@@ -22,33 +22,22 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   .state('mainList', {
     url: '/main-list',
     templateUrl: 'src/restaurantlist/templates/main-categories.template.html',
-    controller: 'MainShoppingListController as mainList',
+    controller: 'CategoriesController as mainList',
     resolve: {
       items: ['MenuDataService', function (MenuDataService) {
-        var resultado = MenuDataService.getItems();
-        console.log("GetItems of routes", resultado);
-
-        return resultado;
+        return MenuDataService.getAllCategories();
       }]
     }
   })
 
   .state('itemDetail', {
-    url: '/item-detail/{itemId}',
+    url: '/item-detail/{short_name}',
     templateUrl: 'src/restaurantlist/templates/item-detail.template.html',
-    controller: 'ItemDetailController as item',
+    controller: 'ItemDetailController as itemDetail',
     resolve: {
-      item: ['$stateParams', 'MenuDataService',
+      items: ['$stateParams', 'MenuDataService',
             function ($stateParams, MenuDataService) {
-              var test  = MenuDataService.getAllCategories()
-                .then(function (items) {
-                  return items[$stateParams.itemId];
-                });
-              console.log(">>>>>", test);
-              return MenuDataService.getAllCategories()
-                .then(function (items) {
-                  return items[$stateParams.itemId];
-                });
+              return MenuDataService.getItemsForCategory($stateParams.short_name);
             }]
     }
   });

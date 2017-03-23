@@ -18,15 +18,31 @@ function MenuDataService($http, RestApiRestaurant) {
     return response;
   }
 
-  service.getItems = function () {
-    var promise = service.getFromService();
-    promise.then(function (response) {
-      console.log("menudata.service > getItems :",response.data);
+  service.getAllCategories = function () {
+    return service.getFromService().then(function (response) {
       return response.data;
     })
     .catch(function (error) {
       console.log("Something went terribly wrong.");
     });
+  }
+
+  service.getItemsForCategory = function (short_name) {
+    return service.getByIDFromService(short_name).then(function (response) {
+      return response.data.menu_items;
+    })
+    .catch(function (error) {
+      console.log("Something went terribly wrong.");
+    });
+  }
+
+  service.getByIDFromService = function (short_name) {
+    var response = $http({
+      method: "GET",
+      url: (RestApiRestaurant + "/menu_items.json?"),
+      params: {category: short_name}
+    });
+    return response;
   }
 }
 
